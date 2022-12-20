@@ -178,10 +178,10 @@ def main():
         else:
             generate = lambda prompt, max_new_tokens: call_model(prompt, model=model, tokenizer=tokenizer, device=device, max_new_tokens=max_new_tokens)
     input_path = args.input_file
-    knowledge = pd.read_pickle(input_path) if input_path.endswith(".pkl") else pd.read_csv(input_path)
+    knowledge = pd.read_csv(input_path, sep="\t")
 
     if args.continue_from is not None:
-        results = pd.read_csv(args.continue_from)
+        results = pd.read_csv(args.continue_from, sep="\t")
         knowledge = knowledge[~knowledge.id.isin(results.id)]
     n = len(knowledge) if args.sample == 0 else args.sample
     sample = knowledge.sample(n=n, replace=False)
