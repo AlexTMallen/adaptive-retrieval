@@ -55,7 +55,7 @@ python run_model.py \
     --input_file data/popQA.tsv \
     --eval_method vanilla
 ```
-We use the (int8bit)[https://arxiv.org/abs/2208.07339] quantization to run GPT-Neox-20B and OPT-13B in our environment (a single V100 Volta 32 GB GRAM). 
+We use the [int8bit](https://arxiv.org/abs/2208.07339) quantization to run GPT-Neox-20B and OPT-13B in our environment (a single V100 Volta 32 GB GRAM). 
 
 ```
 python run_model.py \
@@ -66,7 +66,7 @@ python run_model.py \
 ```
 
 ### Retrieval-augmented LMs
-To run retrieval-augmented LMs using BM25 or Contriever, please download the retrieval results [here](https://drive.google.com/drive/folders/1ggeoHbSPobbGOljOlwl_d16yssSygYqy?usp=sharing). 
+To run retrieval-augmented LMs using BM25 or [Contriever](https://github.com/facebookresearch/contriever), please download the retrieval results [here](https://drive.google.com/drive/folders/1ggeoHbSPobbGOljOlwl_d16yssSygYqy?usp=sharing). 
 
 Then, you can run the retrieval-augmented baselines as follows:
 ```
