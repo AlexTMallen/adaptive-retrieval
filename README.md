@@ -1,6 +1,6 @@
 # Adaptive Retrieval: Popularity-based LM Augmentation 
 
-This is the official repository for our preprint: Alex Mallen, Akari Asai, Victor Zhong, Rajarshi Das, Hannaneh Hajishirzi, and Daniel Khashabi. [When Not to Trust Language Models: Investigating Effectiveness and Limitations of Parametric and Non-Parametric Memories](https://akariasai.github.io/files/llm_memorization.pdf). 2020. 
+This is the official repository for our preprint: Alex Mallen, Akari Asai, Victor Zhong, Rajarshi Das, Hannaneh Hajishirzi, and Daniel Khashabi. [When Not to Trust Language Models: Investigating Effectiveness and Limitations of Parametric and Non-Parametric Memories](https://akariasai.github.io/files/llm_memorization.pdf). 2022. 
 
 In this work, we conduct a large-scale knowledge probing of 10 language models (GPT-Neo series, OPT series and GPT-3 series) and 4 retrieval-augmentation approaches (BM25, Contriever, GenRead and vanilla), using our new open-domain QA dataset, **PopQA**. 
 
@@ -8,7 +8,7 @@ In this work, we conduct a large-scale knowledge probing of 10 language models (
   <img src="figures/teaser_llm.png" width="50%" height="50%">
 </p>
 
-We further introduce a simple-yet-effective **Adaptive Retrieval**, which adaptively retrieves and incorporates non-parametric memories when necessary. Our experimental results show that Adaptive Retrieval is not only more competitive but also more efficient in terms of inference-time latency as well as the GPT-3 API cost.
+We further introduce a simple-yet-effective method, **Adaptive Retrieval**, which adaptively retrieves and incorporates non-parametric memories when necessary. Our experimental results show that Adaptive Retrieval is not only more competitive but also more efficient in terms of inference-time latency as well as the GPT-3 API cost.
 
 ### Contact and Citations 
 For any questions about the paper or the code, please contact the first authors or leave issues.
@@ -74,7 +74,7 @@ python run_model.py \
     --model_name MODEL_NAME \
     --input_file data/popQA.tsv \
     --eval_method contriever \
-    --ret_file PATH_TO_YOUR_CONTRIEVER_FILE
+    --ret_file PATH_TO_RETRIEVED_DOCUMENTS.jsonl
 ```
 To run GenRead, you don't need to specify the retrieval file path.
 ```
@@ -85,3 +85,4 @@ python run_model.py \
 ```
 
 ### Adaptive Retrieval
+See the `adaptive-retrieval.ipynb` notebook, where you can point to the results files (obtained from `run_model.py`) for a parametric (vanilla, GenRead) and non-parametric (BM25, Contriever) evaluation, which will be used to compute adaptive results.
