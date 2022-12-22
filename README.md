@@ -39,17 +39,21 @@ pip install -r requirements.txt
 We construct an entity-centric open-domain QA dataset, consisting of 14k QA pairs with fine-grained Wikidata entity ID, Wikipedia page views, and relationship type information. 
 
 ```
-id	subj	prop	obj	subj_id	prop_id	obj_id	s_aliases	o_aliases	s_uri	o_uri	s_wiki_title	o_wiki_title	s_pop	o_pop	question	possible_answers
-4222362	George Rankin	occupation	politician	1850297	22	2834605	"[""George James Rankin""]"	"[""political leader"",""political figure"",""polit."",""pol""]"	http://www.wikidata.org/entity/Q5543720	http://www.wikidata.org/entity/Q82955	George Rankin	Politician	142	25692	What is George Rankin's occupation?	"[""politician"", ""political leader"", ""political figure"", ""polit."", ""pol""]"
+{'id': 4222362, 'subj': 'George Rankin', 'prop': 'occupation', 'obj': 'politician', 'subj_id': 1850297, 'prop_id': 22, 'obj_id': 2834605, 's_aliases': '["George James Rankin"]', 'o_aliases': '["political leader","political figure","polit.","pol"]', 's_uri': 'http://www.wikidata.org/entity/Q5543720', 'o_uri': 'http://www.wikidata.org/entity/Q82955', 's_wiki_title': 'George Rankin', 'o_wiki_title': 'Politician', 's_pop': 142, 'o_pop': 25692, 'question': "What is George Rankin's occupation?", 'possible_answers': '["politician", "political leader", "political figure", "polit.", "pol"]'}
 ```
 
 The data is available at [data](data/popQA.tsv). 
 
+PopQA is also available available at huggingface datasets: [akariasai/PopQA](https://huggingface.co/datasets/akariasai/PopQA)
+```python
+import datasets
+popqa = datasets.load_dataset("akariasai/PopQA")["test"]
+```
 ## Baselines
 
 ### LMs
 You can reproduce our zero-shot prompting experiments by running the command below: 
-```
+```bash
 python run_model.py \
     --model_name MODEL_NAME \
     --input_file data/popQA.tsv \
@@ -57,7 +61,7 @@ python run_model.py \
 ```
 We use the [int8bit](https://arxiv.org/abs/2208.07339) quantization to run GPT-Neox-20B and OPT-13B in our environment (a single V100 Volta 32 GB GRAM). 
 
-```
+```sh
 python run_model.py \
     --model_name EleutherAI/gpt-neox-20b \
     --input_file data/popQA.tsv \
@@ -69,7 +73,7 @@ python run_model.py \
 To run retrieval-augmented LMs using BM25 or [Contriever](https://github.com/facebookresearch/contriever), please download the retrieval results [here](https://drive.google.com/drive/folders/1ggeoHbSPobbGOljOlwl_d16yssSygYqy?usp=sharing). 
 
 Then, you can run the retrieval-augmented baselines as follows:
-```
+```sh
 python run_model.py \
     --model_name MODEL_NAME \
     --input_file data/popQA.tsv \
@@ -77,7 +81,7 @@ python run_model.py \
     --ret_file PATH_TO_RETRIEVED_DOCUMENTS.jsonl
 ```
 To run GenRead, you don't need to specify the retrieval file path.
-```
+```sh
 python run_model.py \
     --model_name MODEL_NAME \
     --input_file data/popQA.tsv \
